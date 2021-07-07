@@ -59,6 +59,7 @@ class NinjaAPI:
         self.docs_url = docs_url
         self.urls_namespace = urls_namespace or f"api-{self.version}"
         self.csrf = csrf
+        self.override_csrf_validation = override_csrf_validation
         self.renderer = renderer or JSONRenderer()
         self.parser = parser or Parser()
 
