@@ -47,6 +47,7 @@ class NinjaAPI:
         docs_url: Optional[str] = "/docs",
         urls_namespace: Optional[str] = None,
         csrf: bool = False,
+        override_csrf_validation: bool = False,
         auth: Union[Sequence[Callable], Callable, object] = NOT_SET,
         renderer: Optional[BaseRenderer] = None,
         parser: Optional[Parser] = None,
@@ -389,7 +390,7 @@ class NinjaAPI:
         NinjaAPI._registry.append(self.urls_namespace)
 
         # 2) csrf
-        if self.csrf is False:
+        if not self.csrf and not self.override_csrf_validation:
             for _prefix, router in self._routers:
                 for path_operation in router.path_operations.values():
                     for operation in path_operation.operations:
